@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+    <style>
+        .link {
+            padding: 5px;
+            text-decoration: none;
+        }
+
+        .target {
+            width: 100px;
+            height: 100px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #01579B;
+            color: #FFF;
+        }
+    </style>
+</head>
+
+<body>
+    <p><a class="link" href="https://naruhodo.repop.jp/javascript-addeventlistener-on-class/" target="_blank">ANIME.JS
+            CSS Animation Basic Code</a></p>
+    <div id="target1" class="target">MOVE</div>
+    <div id="target2" class="target">ROTATE</div>
+    <div id="target3" class="target">SCALE</div>
+</body>
+<script>
+    document.getElementById('target1').addEventListener('click', function () {
+
+        //移動アニメーション
+        anime({
+            targets: '#target1',
+            translateX: 250
+        });
+
+    });
+
+
+    document.getElementById('target2').addEventListener('click', function () {
+
+        //回転アニメーション
+        anime({
+            targets: '#target2',
+            rotate: 1800
+        });
+
+    });
+
+
+    document.getElementById('target3').addEventListener('click', function () {
+
+        //拡大縮小アニメーション
+        anime({
+            targets: '#target3',
+            scale: 0.5
+        });
+
+    });
+</script>
+
+</html>
