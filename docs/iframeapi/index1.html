@@ -15,7 +15,8 @@
     <div id="app">
         <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
         <!-- <div id="player" style="visibility: hidden"></div> -->
-        <div id="player"></div>
+        <div id="player" style="position: absolute"></div>
+        <img src="./logo.jpg">
 
         <button onclick="test()">play,seekTo</button>
     </div>
@@ -53,7 +54,7 @@
     function onPlayerReady(event) {
         player.setPlaybackQuality('hd1080');
         // 動画をミュートにする
-        event.target.mute();
+        event.target.unMute();
         event.target.playVideo();
     }
 
@@ -71,6 +72,8 @@
         var status = event.data;
         // 再生終了時  
         if (status == YT.PlayerState.ENDED) {
+            event.target.mute();
+
             // 0秒目に移動
             event.target.seekTo(0)
         }
