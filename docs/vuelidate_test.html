@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <style>
+        ul li {
+            padding: 0;
+            list-style: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,6 +37,26 @@
                     @change="$v.checkbox.$touch()" @blur="$v.checkbox.$touch()">
                 </v-checkbox>
 
+                <!-- checkbox group -->
+                <v-form ref="form" v-model="valid">
+                    <v-container>
+                        <v-layout row wrap align-start>
+                            <ul>
+                                <li v-for="(e,index) in dataSource">
+                                    <!-- <v-checkbox :key="index" v-model="selected" :value="e" :label="e"
+                                        :rules="[() => rules.atLeastOneSkill(selected)]"
+                                        :hide-details="index !== (dataSource.length - 1)" required>
+                                    </v-checkbox> -->
+                                    <v-checkbox :key="index" v-model="selected" :value="e" :label="e"
+                                        :rules="[() => rules.atLeastOneSkill(selected)]"
+                                        :hide-details="index !== (dataSource.length - 1)" required>
+                                    </v-checkbox>
+                                </li>
+                            </ul>
+                        </v-layout>
+                    </v-container>
+                </v-form>
+
                 <!-- submit button -->
                 <v-btn @click="submit">submit</v-btn>
                 <!-- clear button -->
@@ -38,10 +65,12 @@
         </v-app>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@1.x/dist/vuetify.js"></script>
 <!-- Vue.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
 <!-- Vuetify CDN -->
-<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script> -->
 <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
 <!-- Google fonts CDN -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
@@ -66,7 +95,7 @@
                 checked(val) {
                     return val
                 }
-            }
+            },
         },
 
         data: () => ({
@@ -79,7 +108,13 @@
                 'Item 3',
                 'Item 4'
             ],
-            checkbox: false
+            checkbox: false,
+            selected: [],
+            dataSource: ['Apple', 'Pen', 'Pineapple'],
+            valid: false,
+            rules: {
+                atLeastOneSkill: (selected) => selected.length > 0 || 'At least one item should be selected',
+            }
         }),
 
         computed: {
@@ -113,7 +148,11 @@
 
         methods: {
             submit() {
-                this.$v.$touch()
+                // this.$v.$touch()
+                this.$refs.form.validate()
+                // if (this.selected.length == 0) {
+
+                // }
             },
             clear() {
                 this.$v.$reset()
