@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dexie/2.0.4/dexie.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // DB定義
+    this.db = new Dexie("twDB");
+    // ストア定義
+    this.db.version(1).stores({
+        // 画像ツイート格納用
+        gtTBL: "++id, msg, mediaurl, iconurl,left,top,animation",
+        // リアルタイムツイート格納用
+        gtnTBL: "++id, msg, mediaurl, iconurl,left,top,animation"
+    });
+    // ローカルDBの更新
+    this.db.gtTBL.put({
+        id: 1,
+        user: "id",
+        msg: "msg",
+        mediaurl: "mediaurl",
+        iconurl: "iconurl",
+        left: "left",
+        top: "top",
+        animation: "animation"
+    });
+
+    // // ローカルDBの中身を全件取得
+    //this.db.gtTBL.toArray().then(gtTBL => {
+    //  // .then(function (notes) {
+    //console.log("TBL参照1");
+    //        console.log(gtTBL);
+    //        this.gtArray = gtTBL;
+    //    });
+
+    axios
+        .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+        .then(function (response) {
+            console.log("response2");
+            console.log(response);
+            // // ローカルDBの中身を全件取得
+            //this.db.gtTBL.toArray().then(gtTBL => {
+            this.db.gtTBL.toArray().then(function (gtTBL) {
+
+                // .then(function (notes) {
+                console.log("success3");
+                console.log(gtTBL);
+                this.gtArray = gtTBL;
+            });
+        })
+        .catch(function (error) {
+            console.log("error2");
+            console.log(error);
+            // // ローカルDBの中身を全件取得
+            this.db.gtTBL.toArray().then(gtTBL => {
+                // .then(function (notes) {
+                console.log("error3");
+                console.log(gtTBL);
+                this.gtArray = gtTBL;
+            });
+        })
+</script>
+
+</html>

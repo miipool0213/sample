@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        li {
+            position: absolute;
+            transition-property: opacity;
+            transition-duration: 1.2s;
+            opacity: 0;
+        }
+
+        img {
+            max-width: 40vw;
+            max-height: 30vw;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="img-list">
+        <li><img src="../random_test/usericon8.jpg"></li>
+        <li><img src="../random_test/usericon8.jpg"></li>
+        <li><img src="../random_test/usericon8.jpg"></li>
+        <li><img src="../random_test/usericon8.jpg"></li>
+        <li><img src="../random_test/usericon8.jpg"></li>
+        <li><img src="../random_test/usericon8.jpg"></li>
+        <li><img src="../random_test/usericon8.jpg"></li>
+        <li><img src="../random_test/usericon8.jpg"></li>
+        <li><img src="../random_test/usericon8.jpg"></li>
+        <li><img src="../random_test/usericon8.jpg"></li>
+        <li><img src="../random_test/usericon8.jpg"></li>
+    </ul>
+</body>
+<script>
+    var browserWidth = window.innerWidth;
+    var browserHeight = window.innerHeight;
+    var docArray = null;
+    var randomVer = 1;
+
+    function randomSet(min, max) {
+        return (Math.floor(Math.random() * (max - min)) + min);
+    }
+
+    // 画面上の座標をランダムで取得
+    function randomValue() {
+        switch (randomVer) {
+            case 1: // 画面左上
+                randomVer = 4;
+                return [randomSet(0, 40), randomSet(0, 40)];
+            case 2: // 画面右上
+                randomVer = 1;
+                return [randomSet(50, 90), randomSet(0, 40)];
+            case 3: // 画面左下
+                randomVer = 2;
+                return [randomSet(0, 40), randomSet(50, 90)];
+            case 4: // 画面右下
+                randomVer = 3;
+                return [randomSet(50, 90), randomSet(50, 90)];
+        }
+    }
+
+    // 画像を追加
+    function addImage() {
+        var imgNumber = Math.floor(Math.random() * docArray.length)
+        var drawImage = docArray[imgNumber]
+        if (drawImage.style.opacity == 0) {
+            [x, y] = randomValue();
+            drawImage.style.top = `${x - 5}%`;
+            drawImage.style.left = `${y - 10}%`;
+            drawImage.style.opacity = 1;
+            setTimeout(function () {
+                drawImage.style.opacity = 0;
+            }, 12000);
+        } else {
+            addImage();
+        }
+    }
+
+    window.onload = function () {
+        docArray = document.getElementById("img-list").children;
+        addImage(docArray);
+        setInterval("addImage()", 2000);
+    }
+</script>
+
+</html>
