@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -43,20 +43,34 @@
     //        this.gtArray = gtTBL;
     //    });
 
+    this.db.gtTBL
+        .toArray()
+        .then(function (notes) {
+            console.log("notes");
+            console.log(notes);
+            var gtArray = notes
+        });
+    console.log(gtArray);
+
+
     axios
         .get('https://api.coindesk.com/v1/bpi/currentprice.json')
         .then(function (response) {
             console.log("response2");
             console.log(response);
-            // // ローカルDBの中身を全件取得
-            //this.db.gtTBL.toArray().then(gtTBL => {
-            this.db.gtTBL.toArray().then(function (gtTBL) {
+            // ローカルDBの中身を全件取得
+            this.db.gtTBL.toArray().then(gtTBL => {
+                // this.db.gtTBL.toArray().then(function (gtTBL) {
 
                 // .then(function (notes) {
-                console.log("success3");
+                // console.log("success3");
                 console.log(gtTBL);
-                this.gtArray = gtTBL;
+                var gtArray = gtTBL;
+                // return gtArray
             });
+            // console.log("test")
+
+            // console.log(test)
         })
         .catch(function (error) {
             console.log("error2");

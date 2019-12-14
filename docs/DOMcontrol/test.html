@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="display">
+        <div class="getTwNow" style="position:absolute;left:-10000px;top:-10000px;">
+            1</div>
+        <div class="getTwNow">
+            2</div>
+        <div class="getTwNow">
+            3</div>
+        <div class="getTwNow">
+            4</div>
+        <div class="getTwNow">
+            5</div>
+        <div class="getTwNow">
+            6</div>
+        <div class="getTwNow">
+            7</div>
+        <div class="getTwNow">
+            8</div>
+        <div class="getTwNow">
+            9</div>
+        <div class="getTwNow">
+            10</div>
+        <div class="getTwNow">
+            11</div>
+        <div class="getTwNow">
+            12</div>
+        <div class="getTwNow">
+            13</div>
+        <div class="getTwNow">
+            14</div>
+        <div class="getTwNow">
+            15</div>
+
+    </div>
+</body>
+<script>
+    // 親要素取得
+    var parentEle = document.getElementById("display");
+    // リアルタイムツイートのDOM取得
+    var gtnChildrenEle = document.getElementsByClassName("getTwNow");
+    // リアルタイムツイートのDOM削除
+    // for (var i = 0; i < this.gtnArrayLength; i++) {
+    //  this.parentEle.removeChild(this.gtnChildrenEle[0]);
+    //}
+    console.log("getTwNowのDOM");
+    console.log(this.gtnChildrenEle);
+
+
+</script>
+
+</html>
